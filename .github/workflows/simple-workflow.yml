@@ -20,4 +20,16 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'Mercell',
+              repo: 'tricom.ia.uitests',
+              workflow_id: 'main.yml',
+              ref: 'main'
+            })
+          
           
