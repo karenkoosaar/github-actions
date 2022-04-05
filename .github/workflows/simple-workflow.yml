@@ -21,15 +21,10 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       
-      - uses: actions/github-script@v6
+      - uses: convictional/trigger-workflow-and-wait@v1.6.0
         with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'Mercell',
-              repo: 'tricom.ia.uitests',
-              workflow_id: 'main.yml',
-              ref: 'main'
-            })
-          
-          
+         owner: Mercell
+         repo: tricom.ia.uitests
+         github_token: ${{ secrets.PAT_TOKEN }}
+         workflow_file_name: main.yml
+         propagate_failure: true
