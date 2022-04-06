@@ -22,18 +22,8 @@ jobs:
           echo test, and deploy your project.
       
       - name: Trigger the main workflow of the Cypress UI tests repository
-        uses: actions/github-script@v6
+        uses: aurelien-baudet/workflow-dispatch@v2
         with:
           github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            try {
-              const result = await github.rest.actions.createWorkflowDispatch({
-              owner: 'Mercell',
-              repo: 'tricom.ia.uitests',
-              workflow_id: 'main.yml',
-            })
-            console.log(result);
-            } catch(error) {
-            console.error(error);
-            core.setFailed(error);
-            }
+          repo: tricom.ia.uitests
+          wait-for-completion: true
