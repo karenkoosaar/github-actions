@@ -24,6 +24,6 @@ jobs:
       - name: Trigger the main workflow of the Cypress UI tests repository
         uses: aurelien-baudet/workflow-dispatch@v2
         with:
-          github-token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           repo: tricom.ia.uitests
           wait-for-completion: true
