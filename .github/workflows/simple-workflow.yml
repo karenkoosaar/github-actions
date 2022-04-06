@@ -21,10 +21,22 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       
-      - uses: convictional/trigger-workflow-and-wait@v1.6.0
+      - name: Trigger the main workflow of the Cypress UI tests repository
+        uses: actions/github-script@v6
         with:
-         owner: Mercell
-         repo: tricom.ia.uitests
-         github_token: ${{ secrets.PAT_TOKEN }}
-         workflow_file_name: main.yml
-         propagate_failure: true
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            try {
+              const result = await github.rest.actions.createWorkflowDispatch({
+              owner: 'Mercell',
+              repo: 'tricom.ia.uitests',
+              workflow_id: 'main.yml',
+              inputs: {
+              tags: ${{ steps.get-tags.outputs.tags }}
+              },
+            })
+            console.log(result);
+            } catch(error) {
+            console.error(error);
+            core.setFailed(error);
+            }
