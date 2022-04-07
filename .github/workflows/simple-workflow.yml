@@ -27,17 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-		- uses: actions/checkout@v2
-	
-		- name: Trigger Workflow and Wait
-		  uses: convictional/trigger-workflow-and-wait@v1.6.0
-		  with:
-			owner: 
-			repo: 
-			github_token: 
-			wait_interval:
-			workflow_file_name: 
-			propagate_failure:
-			wait_workflow:
-
-
+    
+      - name: Trigger cypress UI tests workflow and wait for feedback
+        uses: convictional/trigger-workflow-and-wait@v1.6.0
+	with:
+          owner: Mercell
+	  repo: tricom.ia.uitests
+	  github_token: ${{ secrets.PAT_TOKEN }}
+	  workflow_file_name: main.yml
+	  wait_interval: 60
+	  propagate_failure: true
