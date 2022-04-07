@@ -20,10 +20,17 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-      
-      - name: Trigger the main workflow of the Cypress UI tests repository
-        uses: aurelien-baudet/workflow-dispatch@v2
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          repo: tricom.ia.uitests
-          wait-for-completion: true
+  
+  cypress-run:
+    runs-on: ubuntu-latest
+    
+    steps:  
+      - name: Trigger the main workflow of the Cypress UI tests repository and wait for feedback
+        uses: convictional/trigger-workflow-and-wait@v1.6.0
+		    with:
+		      owner: Mercell
+		      repo: tricom.ia.uitests
+		      github_token: ${{ secrets.PAT_TOKEN }}
+		      workflow_file_name: main.yml
+		      wait_interval: 60
+		      propagate_failure: true
