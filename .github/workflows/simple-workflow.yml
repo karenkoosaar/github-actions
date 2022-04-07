@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  hello-world:
+  hello_world:
+    name: hello-world
     runs-on: ubuntu-latest
 
     steps:
@@ -20,17 +21,23 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-  
-  cypress-run:
+
+  cypress_run:
+    name: cypress run
     runs-on: ubuntu-latest
     
-    steps:  
-      - name: Trigger the main workflow of the Cypress UI tests repository and wait for feedback
-        uses: convictional/trigger-workflow-and-wait@v1.6.0
-		    with:
-		      owner: Mercell
-		      repo: tricom.ia.uitests
-		      github_token: ${{ secrets.PAT_TOKEN }}
-		      workflow_file_name: main.yml
-		      wait_interval: 60
-		      propagate_failure: true
+    steps:
+		- uses: actions/checkout@v2
+	
+		- name: Trigger Workflow and Wait
+		  uses: convictional/trigger-workflow-and-wait@v1.6.0
+		  with:
+			owner: 
+			repo: 
+			github_token: 
+			wait_interval:
+			workflow_file_name: 
+			propagate_failure:
+			wait_workflow:
+
+
