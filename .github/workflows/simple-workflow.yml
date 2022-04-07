@@ -23,17 +23,18 @@ jobs:
           echo test, and deploy your project.
 
   cypress_run:
-    name: cypress run
+    needs: [hello_world]
     runs-on: ubuntu-latest
     
     steps:
-    
-      - name: Trigger cypress UI tests workflow and wait for feedback
+      - name: Triggers Cypress UI tests workflow and waits for feedback
         uses: convictional/trigger-workflow-and-wait@v1.6.0
-	with:
-          owner: Mercell
-	  repo: tricom.ia.uitests
-	  github_token: ${{ secrets.PAT_TOKEN }}
-	  workflow_file_name: main.yml
-	  wait_interval: 60
-	  propagate_failure: true
+				with:
+					owner: Mercell
+					repo: tricom.ia.uitests
+					github_token: ${{ secrets.PAT_TOKEN }}
+					workflow_file_name: main.yml
+					wait_interval: 60
+					propagate_failure: true
+			
+
